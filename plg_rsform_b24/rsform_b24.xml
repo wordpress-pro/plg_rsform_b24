@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<install version="1.5" type="plugin" group="system" method="upgrade">
+	<name>System - RSForm! Bitrix24</name>
+	<author>pshentsoff</author>
+	<creationDate>April 2016</creationDate>
+	<copyright>(C) 2016 pshentsoff.ru</copyright>
+	<license>GNU General Public License</license>
+	<authorEmail>mail@pshentsoff.ru</authorEmail>
+	<authorUrl>pshentsoff.ru</authorUrl>
+	<version>0.0.1</version>
+	<description><![CDATA[Sends data of submitted forms of RSForm! component to the Bitrix24 portal.]]></description>
+	<files>
+		<filename plugin="rsform_b24">rsform_b24.php</filename>
+	</files>
+</install>
