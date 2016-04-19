@@ -91,9 +91,9 @@ class plgSystemRSForm_B24 extends JPlugin
 		rsform_b24_send_lead("$formId/$SubmissionId", $form, $params);
 	}
 
-	public function onBeforeCompileHead()
+	public function onAfterRender()
 	{
 		$params = $this->getParams();
-		rsform_b24_send_lead('test - '.time(), 'Test', $params);
+		rsform_b24_send_lead('test - '.time(), array('name' => 'Test'), $params);
 	}
 }

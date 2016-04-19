@@ -40,7 +40,7 @@ function rsform_b24_send_lead($lead_title, array $form, array $params)
 	// get lead data from the form
 	$postData = array(
 		'TITLE'             => $lead_title,
-		'NAME'              => $form['billing_first_name'],
+		'NAME'              => $form['name'],
 		'SOURCE_ID'         => 'WEB', // источник
 
 	);
