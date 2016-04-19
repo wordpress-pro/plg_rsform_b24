@@ -78,32 +78,25 @@ class plgSystemRSForm_B24 extends JPlugin
 		);
 	}
 
-	public function rsfp_f_onBeforeFormValidation(array $args = null)
-	{
-		JLog::add("rsfp_f_onBeforeFormValidation(): Trigger called: ".print_r($args, true), JLog::DEBUG, 'plg_rsform_b24');
-//		$params = $this->getParams();
-//		rsform_b24_send_lead('onBeforeStoreSubmissions - '.time(), array('name' => 'Test'), $params);
-//		rsform_b24_send_lead("$formId/$SubmissionId", $form, $params);
-	}
-
-	public function rsfp_f_onBeforeFormProcess(array $args = null)
-	{
-		JLog::add("rsfp_f_onBeforeFormProcess(): Trigger called: ".print_r($args, true), JLog::DEBUG, 'plg_rsform_b24');
-	}
-
 	public function rsfp_f_onBeforeStoreSubmissions(array $args = null)
 	{
 		JLog::add("rsfp_f_onBeforeStoreSubmissions(): Trigger called: ".print_r($args, true), JLog::DEBUG, 'plg_rsform_b24');
-	}
 
-	public function rsfp_f_onAfterStoreSubmissions(array $args = null)
-	{
-		JLog::add("rsfp_f_onAfterStoreSubmissions(): Trigger called: ".print_r($args, true), JLog::DEBUG, 'plg_rsform_b24');
-	}
+		if(isset($args['formId'])) {
 
-	public function rsfp_beforeAdminEmail(array $args = null)
-	{
-		JLog::add("rsfp_beforeAdminEmail(): Trigger called: ".print_r($args, true), JLog::DEBUG, 'plg_rsform_b24');
+			$params = $this->getParams();
+
+			$form = array();
+
+			if($args['formId'] == 4) {
+				$form['email'] = isset($args['post']['emaill']) ? $args['post']['emaill'] : '';
+			}
+
+			$SubmissionId = isset($form['SubmissionId']) ? '/'.$form['SubmissionId'] : '';
+
+			rsform_b24_send_lead("Form -{$args['formId']}$SubmissionId - ".time(), $form, $params);
+		}
+
 	}
 
 	public function onAfterRoute()
