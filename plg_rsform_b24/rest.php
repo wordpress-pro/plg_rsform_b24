@@ -40,7 +40,7 @@ function rsform_b24_send_lead($lead_title, array $form, array $params)
 	// get lead data from the form
 	$postData = array(
 		'TITLE'             => $lead_title,
-		'NAME'              => $form['name'],
+		'NAME'              => isset($form['name']) ? $form['name'] : 'Unknown',
 		'SOURCE_ID'         => 'WEB', // источник
 
 	);
