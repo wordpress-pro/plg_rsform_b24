@@ -60,6 +60,11 @@ class plgSystemRSForm_B24 extends JPlugin
 	public function rsfp_f_onBeforeStoreSubmissions($formId, &$post, $SubmissionId)
 	{
 		$form = $post;
-		rsform_b24_send_lead("$formId/$SubmissionId", $form);
+		$params = array(
+			'crm_host' => $this->params->get('crm_host'),
+			'crm_login' => $this->params->get('crm_login'),
+			'crm_password' => $this->params->get('crm_password'),
+		);
+		rsform_b24_send_lead("$formId/$SubmissionId", $form, $params);
 	}
 }

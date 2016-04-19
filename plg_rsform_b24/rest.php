@@ -23,14 +23,17 @@ defined( '_JEXEC' ) or die( 'Restricted access' );
 
 require_once 'defines.php';
 
+jimport('joomla.log.log');
+
 /**
  * Отправка данных лида прямым запросом
  *
- * @param $lead_form - № заказа
+ * @param $lead_title - № заказа
  * @param $form - данные по оплате, доставке и способам
+ * @param $params - параметры
  * @return bool|string
  */
-function rsform_b24_send_lead($lead_title, array $form)
+function rsform_b24_send_lead($lead_title, array $form, array $params)
 {
 	$result = false;
 
@@ -46,12 +49,12 @@ function rsform_b24_send_lead($lead_title, array $form)
 	if (defined('CRM_AUTH')) {
 		$postData['AUTH'] = CRM_AUTH;
 	} else {
-		$postData['LOGIN'] = RSFORM_B24_CRM_LOGIN;
-		$postData['PASSWORD'] = RSFORM_B24_CRM_PASSWORD;
+		$postData['LOGIN'] = $params['crm_login'];
+		$postData['PASSWORD'] = $params['crm_password'];
 	}
 
 	// open socket to CRM
-	$fp = fsockopen("ssl://" . RSFORM_B24_CRM_HOST, RSFORM_B24_CRM_PORT, $errno, $errstr, 30);
+	$fp = fsockopen("ssl://" . $params['crm_host'], RSFORM_B24_CRM_PORT, $errno, $errstr, 30);
 	if ($fp) {
 		// prepare POST data
 		$strPostData = '';
@@ -61,7 +64,7 @@ function rsform_b24_send_lead($lead_title, array $form)
 
 		// prepare POST headers
 		$str = "POST " . RSFORM_B24_CRM_LEAD_PATH . " HTTP/1.0\r\n";
-		$str .= "Host: " . RSFORM_B24_CRM_HOST . "\r\n";
+		$str .= "Host: " . $params['crm_host'] . "\r\n";
 		$str .= "Content-Type: application/x-www-form-urlencoded\r\n";
 		$str .= "Content-Length: " . strlen($strPostData) . "\r\n";
 		$str .= "Connection: close\r\n\r\n";
@@ -81,7 +84,7 @@ function rsform_b24_send_lead($lead_title, array $form)
 		// проверка отправки
 		$response = explode("\r\n\r\n", $result);
 
-//		error_log('wcb24_send_lead: Response is '.print_r($response, true));
+//		JLog::add('wcb24_send_lead: Response is '.print_r($response, true));
 
 		$resp = preg_replace("/'/", '"', $response[1]);
 		$resp = json_decode($resp, true);
@@ -89,20 +92,20 @@ function rsform_b24_send_lead($lead_title, array $form)
 
 		// Ошибка декодирования json ответа
 		if($jle !== 0) {
-			error_log("wcb24_send_lead: Error response decoding[$jle]: ".print_r($resp, true));
+			JLog::add("wcb24_send_lead: Error response decoding[$jle]: ".print_r($resp, true));
 			return false;
 		}
 
 		// Статус ответа не 201
 		if($resp['error'] != 201) {
-			error_log('wcb24_send_lead: Error response status: '.print_r($resp, true));
+			JLog::add('wcb24_send_lead: Error response status: '.print_r($resp, true));
 			return false;
 		}
 
 		$result = $resp['ID'];
 
 	} else {
-		error_log('wcb24_send_lead: Connection Failed! ' . $errstr . ' (' . $errno . ')');
+		JLog::add('wcb24_send_lead: Connection Failed! ' . $errstr . ' (' . $errno . ')');
 	}
 
 	return $result;
