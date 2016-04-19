@@ -123,9 +123,9 @@ class plgSystemRSForm_B24 extends JPlugin
 				$post['phone'] = $_POST['phone'];
 				$post['email'] = $_POST['email'];
 				// @todo create text table with values
-				$post['message'] = json_encode($_POST['amout']);
+				$post['message'] = json_encode($_POST['amount']);
 
-				rsform_b24_send_lead('Ext Send Callback -'.time(), $post, $this->getParams());
+				rsform_b24_send_lead('Order -'.time(), $post, $this->getParams());
 			}
 		}
 //		$params = $this->getParams();
