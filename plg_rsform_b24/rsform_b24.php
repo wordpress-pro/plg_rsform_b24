@@ -94,7 +94,7 @@ class plgSystemRSForm_B24 extends JPlugin
 
 			$SubmissionId = isset($form['SubmissionId']) ? '/'.$form['SubmissionId'] : '';
 
-			rsform_b24_send_lead("Form -{$args['formId']}$SubmissionId - ".time(), $form, $params);
+			rsform_b24_send_lead("Form - {$args['formId']}$SubmissionId - ".time(), $form, $params);
 		}
 
 	}
@@ -113,6 +113,17 @@ class plgSystemRSForm_B24 extends JPlugin
 				$post['phone'] = $_POST['phone'];
 				$post['email'] = $_POST['email'];
 				$post['message'] = $_POST['message'];
+
+				rsform_b24_send_lead('Ext Send Callback -'.time(), $post, $this->getParams());
+			} elseif(isset($_POST['siteform'])) {
+
+				$post = array();
+				// @todo get values by native Joomla! mthods and validate
+				$post['name'] = $_POST['fullname'];
+				$post['phone'] = $_POST['phone'];
+				$post['email'] = $_POST['email'];
+				// @todo create text table with values
+				$post['message'] = json_encode($_POST['amout']);
 
 				rsform_b24_send_lead('Ext Send Callback -'.time(), $post, $this->getParams());
 			}
