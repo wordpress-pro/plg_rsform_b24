@@ -78,17 +78,12 @@ class plgSystemRSForm_B24 extends JPlugin
 		);
 	}
 
-	public function onBeforeFormValidation(array $args = null)
-	{
-		JLog::add("onBeforeFormValidation(): Trigger called: ".print_r($args, true), JLog::DEBUG, 'plg_rsform_b24');
-//		$params = $this->getParams();
-//		rsform_b24_send_lead('onBeforeStoreSubmissions - '.time(), array('name' => 'Test'), $params);
-//		rsform_b24_send_lead("$formId/$SubmissionId", $form, $params);
-	}
-
 	public function rsfp_f_onBeforeFormValidation(array $args = null)
 	{
 		JLog::add("rsfp_f_onBeforeFormValidation(): Trigger called: ".print_r($args, true), JLog::DEBUG, 'plg_rsform_b24');
+//		$params = $this->getParams();
+//		rsform_b24_send_lead('onBeforeStoreSubmissions - '.time(), array('name' => 'Test'), $params);
+//		rsform_b24_send_lead("$formId/$SubmissionId", $form, $params);
 	}
 
 	public function rsfp_f_onBeforeFormProcess(array $args = null)
@@ -96,19 +91,9 @@ class plgSystemRSForm_B24 extends JPlugin
 		JLog::add("rsfp_f_onBeforeFormProcess(): Trigger called: ".print_r($args, true), JLog::DEBUG, 'plg_rsform_b24');
 	}
 
-	public function onBeforeFormProcess(array $args = null)
-	{
-		JLog::add("onBeforeFormProcess(): Trigger called: ".print_r($args, true), JLog::DEBUG, 'plg_rsform_b24');
-	}
-
 	public function rsfp_f_onBeforeStoreSubmissions(array $args = null)
 	{
 		JLog::add("rsfp_f_onBeforeStoreSubmissions(): Trigger called: ".print_r($args, true), JLog::DEBUG, 'plg_rsform_b24');
-	}
-
-	public function onBeforeStoreSubmissions(array $args = null)
-	{
-		JLog::add("onBeforeStoreSubmissions(): Trigger called: ".print_r($args, true), JLog::DEBUG, 'plg_rsform_b24');
 	}
 
 	public function rsfp_f_onAfterStoreSubmissions(array $args = null)
@@ -116,19 +101,9 @@ class plgSystemRSForm_B24 extends JPlugin
 		JLog::add("rsfp_f_onAfterStoreSubmissions(): Trigger called: ".print_r($args, true), JLog::DEBUG, 'plg_rsform_b24');
 	}
 
-	public function onAfterStoreSubmissions(array $args = null)
-	{
-		JLog::add("onAfterStoreSubmissions(): Trigger called: ".print_r($args, true), JLog::DEBUG, 'plg_rsform_b24');
-	}
-
 	public function rsfp_beforeAdminEmail(array $args = null)
 	{
 		JLog::add("rsfp_beforeAdminEmail(): Trigger called: ".print_r($args, true), JLog::DEBUG, 'plg_rsform_b24');
-	}
-
-	public function beforeAdminEmail(array $args = null)
-	{
-		JLog::add("beforeAdminEmail(): Trigger called: ".print_r($args, true), JLog::DEBUG, 'plg_rsform_b24');
 	}
 
 	public function onAfterRoute()
