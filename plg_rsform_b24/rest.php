@@ -84,7 +84,7 @@ function rsform_b24_send_lead($lead_title, array $form, array $params)
 		// проверка отправки
 		$response = explode("\r\n\r\n", $result);
 
-//		JLog::add('wcb24_send_lead: Response is '.print_r($response, true));
+		JLog::add('wcb24_send_lead: Response is '.print_r($response, true), JLog::DEBUG, 'plg_rsform_b24');
 
 		$resp = preg_replace("/'/", '"', $response[1]);
 		$resp = json_decode($resp, true);
@@ -92,20 +92,20 @@ function rsform_b24_send_lead($lead_title, array $form, array $params)
 
 		// Ошибка декодирования json ответа
 		if($jle !== 0) {
-			JLog::add("wcb24_send_lead: Error response decoding[$jle]: ".print_r($resp, true));
+			JLog::add("wcb24_send_lead: Error response decoding[$jle]: ".print_r($resp, true), JLog::DEBUG, 'plg_rsform_b24');
 			return false;
 		}
 
 		// Статус ответа не 201
 		if($resp['error'] != 201) {
-			JLog::add('wcb24_send_lead: Error response status: '.print_r($resp, true));
+			JLog::add('wcb24_send_lead: Error response status: '.print_r($resp, true), JLog::DEBUG, 'plg_rsform_b24');
 			return false;
 		}
 
 		$result = $resp['ID'];
 
 	} else {
-		JLog::add('wcb24_send_lead: Connection Failed! ' . $errstr . ' (' . $errno . ')');
+		JLog::add('wcb24_send_lead: Connection Failed! ' . $errstr . ' (' . $errno . ')', JLog::DEBUG, 'plg_rsform_b24');
 	}
 
 	return $result;

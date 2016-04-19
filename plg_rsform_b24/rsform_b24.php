@@ -34,6 +34,19 @@ class plgSystemRSForm_B24 extends JPlugin
 	public function plgRSFormBitrix24(&$subject, $config)
 	{
 		parent::__construct( $subject, $config );
+
+		JLog::addLogger(
+			array(
+				// Sets file name
+				'text_file' => 'plg_rsform_b24.errors.php'
+			),
+			// Sets messages of all log levels to be sent to the file
+			JLog::ALL,
+			// The log category/categories which should be recorded in this file
+			// In this case, it's just the one category from our extension, still
+			// we need to put it inside an array
+			array('plg_rsform_b24')
+		);
 	}
 
 	public function canRun()
