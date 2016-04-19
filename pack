@@ -1,0 +1,5 @@
+#!/bin/bash
+
+cd plg_rsform_b24
+zip -ur ../backups/plg_rsform_b24.zip .
+cd ../
