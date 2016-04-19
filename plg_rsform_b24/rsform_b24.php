@@ -64,6 +64,20 @@ class plgSystemRSForm_B24 extends JPlugin
 	}
 
 	/**
+	 * Get plugin params as array
+	 *
+	 * @return array
+	 */
+	protected function getParams()
+	{
+		return array(
+			'crm_host' => $this->params->get('crm_host'),
+			'crm_login' => $this->params->get('crm_login'),
+			'crm_password' => $this->params->get('crm_password'),
+		);
+	}
+
+	/**
 	 * Trigger Event - onBeforeStoreSubmissions
 	 *
 	 * @param $formId
@@ -73,11 +87,13 @@ class plgSystemRSForm_B24 extends JPlugin
 	public function rsfp_f_onBeforeStoreSubmissions($formId, &$post, $SubmissionId)
 	{
 		$form = $post;
-		$params = array(
-			'crm_host' => $this->params->get('crm_host'),
-			'crm_login' => $this->params->get('crm_login'),
-			'crm_password' => $this->params->get('crm_password'),
-		);
+		$params = $this->getParams();
 		rsform_b24_send_lead("$formId/$SubmissionId", $form, $params);
+	}
+
+	public function onBeforeCompileHead()
+	{
+		$params = $this->getParams();
+		rsform_b24_send_lead('test - '.time(), 'Test', $params);
 	}
 }
