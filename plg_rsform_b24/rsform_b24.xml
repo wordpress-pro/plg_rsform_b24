@@ -9,7 +9,41 @@
 	<authorUrl>pshentsoff.ru</authorUrl>
 	<version>0.0.1</version>
 	<description><![CDATA[Sends data of submitted forms of RSForm! component to the Bitrix24 portal.]]></description>
+
 	<files>
 		<filename plugin="rsform_b24">rsform_b24.php</filename>
+		<filename>defines.php</filename>
+		<filename>rest.php</filename>
 	</files>
+
+	<config>
+		<fields name="params">
+			<fieldset name="basic">
+				<field name="crm_host"
+					   type="text"
+					   label="Bitrix24 portal"
+					   description="i.e. 'myportal.bitrix24.ru"
+					   filter="string"
+					   default=""
+					   size="50"
+					   />
+				<field name="crm_login"
+					   type="text"
+					   label="Bitrix24 login"
+					   description=""
+					   filter="string"
+					   default=""
+					   size="50"
+					   />
+				<field name="crm_password"
+					   type="password"
+					   label="Bitrix24 password"
+					   description=""
+					   filter="string"
+					   default=""
+					   size="50"
+					   />
+			</fieldset>
+		</fields>
+	</config>
 </install>
