@@ -43,6 +43,21 @@ function rsform_b24_send_lead($lead_title, array $form, array $params)
 		'NAME'              => isset($form['name']) ? $form['name'] : 'Unknown',
 		'SOURCE_ID'         => 'WEB', // источник
 
+		'PHONE' => array(
+			array(
+				"VALUE" => (isset($form['phone']) ? $form['phone'] : ''),
+				"VALUE_TYPE" => "WORK",
+			),
+		),
+
+		'EMAIL' => array(
+			array(
+				"VALUE" => (isset($form['email']) ? $form['email'] : ''),
+				"VALUE_TYPE" => "WORK",
+			),
+		),
+
+		'COMMENTS' => (isset($form['message']) ? $form['message'] : ''),
 	);
 
 	// append authorization data

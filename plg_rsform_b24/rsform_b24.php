@@ -22,6 +22,7 @@
 defined( '_JEXEC' ) or die( 'Restricted access' );
 
 jimport( 'joomla.plugin.plugin' );
+jimport('joomla.log.log');
 
 require_once 'rest.php';
 
@@ -31,7 +32,7 @@ require_once 'rest.php';
 class plgSystemRSForm_B24 extends JPlugin
 {
 
-	public function plgSystemRSForm_B24(&$subject, $config)
+	public function __construct(&$subject, $config)
 	{
 		parent::__construct( $subject, $config );
 
@@ -77,23 +78,79 @@ class plgSystemRSForm_B24 extends JPlugin
 		);
 	}
 
-	/**
-	 * Trigger Event - onBeforeStoreSubmissions
-	 *
-	 * @param $formId
-	 * @param $post
-	 * @param $SubmissionId
-	 */
-	public function rsfp_f_onBeforeStoreSubmissions($formId, &$post, $SubmissionId)
+	public function onBeforeFormValidation(array $args = null)
 	{
-		$form = $post;
-		$params = $this->getParams();
-		rsform_b24_send_lead("$formId/$SubmissionId", $form, $params);
+		JLog::add("onBeforeFormValidation(): Trigger called: ".print_r($args, true), JLog::DEBUG, 'plg_rsform_b24');
+//		$params = $this->getParams();
+//		rsform_b24_send_lead('onBeforeStoreSubmissions - '.time(), array('name' => 'Test'), $params);
+//		rsform_b24_send_lead("$formId/$SubmissionId", $form, $params);
 	}
 
-//	public function onAfterRender()
-//	{
+	public function rsfp_f_onBeforeFormValidation(array $args = null)
+	{
+		JLog::add("rsfp_f_onBeforeFormValidation(): Trigger called: ".print_r($args, true), JLog::DEBUG, 'plg_rsform_b24');
+	}
+
+	public function rsfp_f_onBeforeFormProcess(array $args = null)
+	{
+		JLog::add("rsfp_f_onBeforeFormProcess(): Trigger called: ".print_r($args, true), JLog::DEBUG, 'plg_rsform_b24');
+	}
+
+	public function onBeforeFormProcess(array $args = null)
+	{
+		JLog::add("onBeforeFormProcess(): Trigger called: ".print_r($args, true), JLog::DEBUG, 'plg_rsform_b24');
+	}
+
+	public function rsfp_f_onBeforeStoreSubmissions(array $args = null)
+	{
+		JLog::add("rsfp_f_onBeforeStoreSubmissions(): Trigger called: ".print_r($args, true), JLog::DEBUG, 'plg_rsform_b24');
+	}
+
+	public function onBeforeStoreSubmissions(array $args = null)
+	{
+		JLog::add("onBeforeStoreSubmissions(): Trigger called: ".print_r($args, true), JLog::DEBUG, 'plg_rsform_b24');
+	}
+
+	public function rsfp_f_onAfterStoreSubmissions(array $args = null)
+	{
+		JLog::add("rsfp_f_onAfterStoreSubmissions(): Trigger called: ".print_r($args, true), JLog::DEBUG, 'plg_rsform_b24');
+	}
+
+	public function onAfterStoreSubmissions(array $args = null)
+	{
+		JLog::add("onAfterStoreSubmissions(): Trigger called: ".print_r($args, true), JLog::DEBUG, 'plg_rsform_b24');
+	}
+
+	public function rsfp_beforeAdminEmail(array $args = null)
+	{
+		JLog::add("rsfp_beforeAdminEmail(): Trigger called: ".print_r($args, true), JLog::DEBUG, 'plg_rsform_b24');
+	}
+
+	public function beforeAdminEmail(array $args = null)
+	{
+		JLog::add("beforeAdminEmail(): Trigger called: ".print_r($args, true), JLog::DEBUG, 'plg_rsform_b24');
+	}
+
+	public function onAfterRoute()
+	{
+		if(!empty($_POST)) {
+			JLog::add("onAfterRoute(): Trigger called with form post: ".print_r($_POST, true), JLog::DEBUG, 'plg_rsform_b24');
+
+			// Custom JForm
+			if(isset($_POST['extsendcallback'])) {
+
+				$post = array();
+				// @todo get values by native Joomla! mthods and validate
+				$post['name'] = $_POST['name'];
+				$post['phone'] = $_POST['phone'];
+				$post['email'] = $_POST['email'];
+				$post['message'] = $_POST['message'];
+
+				rsform_b24_send_lead('Ext Send Callback -'.time(), $post, $this->getParams());
+			}
+		}
 //		$params = $this->getParams();
 //		rsform_b24_send_lead('test - '.time(), array('name' => 'Test'), $params);
-//	}
+	}
+
 }
