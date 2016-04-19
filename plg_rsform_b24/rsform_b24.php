@@ -31,7 +31,7 @@ require_once 'rest.php';
 class plgSystemRSForm_B24 extends JPlugin
 {
 
-	public function plgRSFormBitrix24(&$subject, $config)
+	public function plgSystemRSForm_B24(&$subject, $config)
 	{
 		parent::__construct( $subject, $config );
 
