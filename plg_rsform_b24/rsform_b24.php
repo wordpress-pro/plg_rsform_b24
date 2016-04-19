@@ -28,7 +28,7 @@ require_once 'rest.php';
 /**
  * RSForm! Bitrix24 system plugin
  */
-class plgRSFormBitrix24 extends JPlugin
+class plgSystemRSForm_B24 extends JPlugin
 {
 
 	public function plgRSFormBitrix24(&$subject, $config)

@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8" ?>
-<install version="1.5" type="plugin" group="system" method="upgrade">
+<install version="3.0" type="plugin" group="system" method="upgrade">
 	<name>System - RSForm! Bitrix24</name>
 	<author>pshentsoff</author>
 	<creationDate>April 2016</creationDate>
@@ -12,6 +12,7 @@
 
 	<files>
 		<filename plugin="rsform_b24">rsform_b24.php</filename>
+		<filename>index.html</filename>
 		<filename>defines.php</filename>
 		<filename>rest.php</filename>
 	</files>
