@@ -125,7 +125,7 @@ class plgSystemRSForm_B24 extends JPlugin
 				$post['email'] = $_POST['email'];
 				$post['message'] = $_POST['message'];
 
-				rsform_b24_send_lead('Ext Send Callback - '.time(), $post, $this->getParams());
+				rsform_b24_send_lead('ЗАДАЙТЕ ЛЮБОЙ ВОПРОС ИЛИ ЗАБРОНИРУЙТЕ МЕРОПРИЯТИЕ - '.time(), $post, $this->getParams());
 
 				// Order form
 			} elseif(isset($_POST['siteform'])) {

@@ -23,7 +23,12 @@ defined( '_JEXEC' ) or die( 'Restricted access' );
 
 require_once 'defines.php';
 
-jimport('joomla.log.log');
+function _rsform_b24_debug_log($message)
+{
+	if(class_exists('JLog')) {
+		JLog::add($message, JLog::DEBUG, 'plg_rsform_b24');
+	}
+}
 
 /**
  * Отправка данных лида прямым запросом
@@ -33,9 +38,24 @@ jimport('joomla.log.log');
  * @param $params - параметры
  * @return bool|string
  */
-function rsform_b24_send_lead($lead_title, array $form, array $params)
+function rsform_b24_send_lead($lead_title, array $form, array $params = null)
 {
 	$result = false;
+
+	// Если функция используется в одном из костылей и нет возможности получить параметры плагина с настройками для соединения и авторизации
+	if(!isset($params)) {
+
+		if(!defined('WCB24_CRM_HOST') || !defined('WCB24_CRM_LOGIN') || !defined('WCB24_CRM_PASSWORD')) {
+			_rsform_b24_debug_log('CRM host and authorization settings required.');
+			return false;
+		}
+
+		$params = array(
+			'crm_host' => WCB24_CRM_HOST,
+			'crm_login' => WCB24_CRM_LOGIN,
+			'crm_password' => WCB24_CRM_PASSWORD,
+		);
+	}
 
 	// get lead data from the form
 	$postData = array(
@@ -89,7 +109,7 @@ function rsform_b24_send_lead($lead_title, array $form, array $params)
 		// проверка отправки
 		$response = explode("\r\n\r\n", $result);
 
-		JLog::add('wcb24_send_lead: Response is '.print_r($response, true), JLog::DEBUG, 'plg_rsform_b24');
+		_rsform_b24_debug_log('wcb24_send_lead: Response is '.print_r($response, true));
 
 		$resp = preg_replace("/'/", '"', $response[1]);
 		$resp = json_decode($resp, true);
@@ -97,20 +117,20 @@ function rsform_b24_send_lead($lead_title, array $form, array $params)
 
 		// Ошибка декодирования json ответа
 		if($jle !== 0) {
-			JLog::add("wcb24_send_lead: Error response decoding[$jle]: ".print_r($resp, true), JLog::DEBUG, 'plg_rsform_b24');
+			_rsform_b24_debug_log("wcb24_send_lead: Error response decoding[$jle]: ".print_r($resp, true));
 			return false;
 		}
 
 		// Статус ответа не 201
 		if($resp['error'] != 201) {
-			JLog::add('wcb24_send_lead: Error response status: '.print_r($resp, true), JLog::DEBUG, 'plg_rsform_b24');
+			_rsform_b24_debug_log('wcb24_send_lead: Error response status: '.print_r($resp, true));
 			return false;
 		}
 
 		$result = $resp['ID'];
 
 	} else {
-		JLog::add('wcb24_send_lead: Connection Failed! ' . $errstr . ' (' . $errno . ')', JLog::DEBUG, 'plg_rsform_b24');
+		_rsform_b24_debug_log('wcb24_send_lead: Connection Failed! ' . $errstr . ' (' . $errno . ')');
 	}
 
 	return $result;

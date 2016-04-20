@@ -29,3 +29,12 @@ defined('RSFORM_B24_CRM_LEAD_PATH') or define('RSFORM_B24_CRM_LEAD_PATH', '/crm/
  * протокол, по которому работаем. должен быть https
  */
 define('RSFORM_B24_PROTOCOL', "https");
+
+/**
+ * Определения для костыльных решений, чтобы не запускать приложения
+ */
+// CRM server conection data
+defined('WCB24_CRM_HOST') or define('WCB24_CRM_HOST', 'kinohouse-work.bitrix24.ru'); // your CRM domain name
+// CRM server authorization data
+defined('WCB24_CRM_LOGIN') or define('WCB24_CRM_LOGIN', 'vladimr.surkov@ya.ru'); // login of a CRM user able to manage leads
+defined('WCB24_CRM_PASSWORD') or define('WCB24_CRM_PASSWORD', 'wK1R9t'); // password of a CRM user
