@@ -86,15 +86,16 @@ class plgSystemRSForm_B24 extends JPlugin
 
 			$params = $this->getParams();
 
+			$SubmissionId = isset($form['SubmissionId']) ? '/'.$form['SubmissionId'] : '';
+			$title = "Form - {$args['formId']}$SubmissionId - ".time();
+
 			$form = array();
 
 			if($args['formId'] == 4) {
 				$form['email'] = isset($args['post']['emaill']) ? $args['post']['emaill'] : '';
 			}
 
-			$SubmissionId = isset($form['SubmissionId']) ? '/'.$form['SubmissionId'] : '';
-
-			rsform_b24_send_lead("Form - {$args['formId']}$SubmissionId - ".time(), $form, $params);
+			rsform_b24_send_lead($title, $form, $params);
 		}
 
 	}
@@ -108,24 +109,24 @@ class plgSystemRSForm_B24 extends JPlugin
 			if(isset($_POST['extsendcallback'])) {
 
 				$post = array();
-				// @todo get values by native Joomla! mthods and validate
+				// @todo get values by native Joomla! methods and validate
 				$post['name'] = $_POST['name'];
 				$post['phone'] = $_POST['phone'];
 				$post['email'] = $_POST['email'];
 				$post['message'] = $_POST['message'];
 
-				rsform_b24_send_lead('Ext Send Callback -'.time(), $post, $this->getParams());
+				rsform_b24_send_lead('Ext Send Callback - '.time(), $post, $this->getParams());
 			} elseif(isset($_POST['siteform'])) {
 
 				$post = array();
-				// @todo get values by native Joomla! mthods and validate
+				// @todo get values by native Joomla! methods and validate
 				$post['name'] = $_POST['fullname'];
 				$post['phone'] = $_POST['phone'];
 				$post['email'] = $_POST['email'];
 				// @todo create text table with values
 				$post['message'] = json_encode($_POST['amount']);
 
-				rsform_b24_send_lead('Order -'.time(), $post, $this->getParams());
+				rsform_b24_send_lead('Order - '.time(), $post, $this->getParams());
 			}
 		}
 //		$params = $this->getParams();

@@ -40,22 +40,12 @@ function rsform_b24_send_lead($lead_title, array $form, array $params)
 	// get lead data from the form
 	$postData = array(
 		'TITLE'             => $lead_title,
-		'NAME'              => isset($form['name']) ? $form['name'] : 'Unknown',
+		'NAME'              => isset($form['name']) ? $form['name'] : '',
 		'SOURCE_ID'         => 'WEB', // источник
 
-		'PHONE' => array(
-			array(
-				"VALUE" => (isset($form['phone']) ? $form['phone'] : ''),
-				"VALUE_TYPE" => "WORK",
-			),
-		),
+		'PHONE_MOBILE' => (isset($form['phone']) ? $form['phone'] : ''),
 
-		'EMAIL' => array(
-			array(
-				"VALUE" => (isset($form['email']) ? $form['email'] : ''),
-				"VALUE_TYPE" => "WORK",
-			),
-		),
+		'EMAIL_WORK' => (isset($form['email']) ? $form['email'] : ''),
 
 		'COMMENTS' => (isset($form['message']) ? $form['message'] : ''),
 	);
