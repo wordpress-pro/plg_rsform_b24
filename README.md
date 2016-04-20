@@ -16,9 +16,15 @@ Sends data of submitted forms of RSForm! component to the Bitrix24 portal.
 ### Useful links:
 
 #### Version 0.0.1
-#### Last work version 0.0.0
-#### Last stable version 0.0.0
+#### Last work version 0.0.1
+#### Last stable version 0.0.1
 
 ### Versions history
 
 #### version 0.0.1
+
+-  Страница настроек для авторизации на портале
+-  Отладочный режим
+-  Перехватывает событие обработки форм RSForm!Pro rsfp_f_onBeforeStoreSubmissions и отправляет лидом данные формы
+-  Перхватывает системные события окончания обработки роута и отправляет лидом данные двух видов форм
+-  Есть возможность подключения без загрузки приложения фреймворка для обработки костыльных форм
