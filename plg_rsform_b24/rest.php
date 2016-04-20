@@ -21,7 +21,7 @@
 // no direct access
 defined( '_JEXEC' ) or die( 'Restricted access' );
 
-require_once 'defines.php';
+require_once __DIR__.'/defines.php';
 
 function _rsform_b24_debug_log($message)
 {
