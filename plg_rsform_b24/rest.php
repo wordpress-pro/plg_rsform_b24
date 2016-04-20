@@ -116,3 +116,22 @@ function rsform_b24_send_lead($lead_title, array $form, array $params)
 	return $result;
 }
 
+/**
+ * Форма заказа для отправки комментарием к лиду
+ * Только для сайта http://www.stimul-tb.ru
+ * @param $amount
+ * @return string
+ */
+function _rsform_b24_order_tpl($amount)
+{
+	$out = <<<END
+НИЖНЯЯ ТРАССА НА ВЕСЬ ДЕНЬ: Будни - {$amount[0]['weekdays']}/Выходные - {$amount[0]['weekend']}
+ | ВЕСЬ ПАРК НА ВЕСЬ ДЕНЬ: Будни - {$amount[1]['weekdays']}/Выходные - {$amount[1]['weekend']}
+ | СЕМЕЙНЫЙ 1+1 НА ВЕСЬ ДЕНЬ: Будни - {$amount[2]['weekdays']}/Выходные - {$amount[2]['weekend']}
+ | СЕМЕЙНЫЙ 2+1 НА ВЕСЬ ДЕНЬ: Будни - {$amount[3]['weekdays']}/Выходные - {$amount[3]['weekend']}
+ | СЕМЕЙНЫЙ 2+2 НА ВЕСЬ ДЕНЬ: Будни - {$amount[4]['weekdays']}/Выходные - {$amount[4]['weekend']}
+ | ВНЕСТИ ПРЕДОПЛАТУ: Будни - {$amount[5]['weekdays']}/Выходные - {$amount[5]['weekend']}
+END;
+
+	return $out;
+}
