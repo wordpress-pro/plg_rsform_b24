@@ -31,10 +31,19 @@ require_once 'rest.php';
  */
 class plgSystemRSForm_B24 extends JPlugin
 {
+	protected $debug;
 
 	public function __construct(&$subject, $config)
 	{
 		parent::__construct( $subject, $config );
+
+		$this->debug = $this->params->get('debug');
+
+		if($this->debug) {
+			$log = JLog::ALL;
+		} else {
+			$log = JLog::ALL & ~JLog::DEBUG;
+		}
 
 		JLog::addLogger(
 			array(
@@ -42,12 +51,13 @@ class plgSystemRSForm_B24 extends JPlugin
 				'text_file' => 'plg_rsform_b24.errors.php'
 			),
 			// Sets messages of all log levels to be sent to the file
-			JLog::ALL,
+			$log,
 			// The log category/categories which should be recorded in this file
 			// In this case, it's just the one category from our extension, still
 			// we need to put it inside an array
 			array('plg_rsform_b24')
 		);
+
 	}
 
 	public function canRun()

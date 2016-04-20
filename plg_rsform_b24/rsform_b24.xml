@@ -44,6 +44,14 @@
 					   default=""
 					   size="50"
 					   />
+				<field name="debug"
+					   type="checkbox"
+					   label="Debug mode"
+					   description=""
+					   filter="boolean"
+					   default=""
+					   size="50"
+					   />
 			</fieldset>
 		</fields>
 	</config>
