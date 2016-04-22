@@ -97,7 +97,7 @@ class plgSystemRSForm_B24 extends JPlugin
 			$params = $this->getParams();
 
 			$SubmissionId = isset($form['SubmissionId']) ? '/'.$form['SubmissionId'] : '';
-			$title = "Form - {$args['formId']}$SubmissionId - ".time();
+			$title = "Сообщение формы {$args['formId']}$SubmissionId";
 
 			$form = array();
 
@@ -125,7 +125,7 @@ class plgSystemRSForm_B24 extends JPlugin
 				$post['email'] = $_POST['email'];
 				$post['message'] = $_POST['message'];
 
-				rsform_b24_send_lead('ЗАДАЙТЕ ЛЮБОЙ ВОПРОС ИЛИ ЗАБРОНИРУЙТЕ МЕРОПРИЯТИЕ - '.time(), $post, $this->getParams());
+				rsform_b24_send_lead('Сообщение формы: "ЗАДАЙТЕ ЛЮБОЙ ВОПРОС ИЛИ ЗАБРОНИРУЙТЕ МЕРОПРИЯТИЕ"', $post, $this->getParams());
 
 				// Order form
 			} elseif(isset($_POST['siteform'])) {
@@ -138,7 +138,7 @@ class plgSystemRSForm_B24 extends JPlugin
 				// @todo create text table with values
 				$post['message'] = _rsform_b24_order_tpl($_POST['amount']);
 
-				rsform_b24_send_lead('Order - '.time(), $post, $this->getParams());
+				rsform_b24_send_lead('Форма заказа', $post, $this->getParams());
 
 			}
 		}

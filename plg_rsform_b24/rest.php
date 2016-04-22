@@ -58,8 +58,11 @@ function rsform_b24_send_lead($lead_title, array $form, array $params = null)
 	}
 
 	// get lead data from the form
+	$timezone = date_default_timezone_get();
+	date_default_timezone_set('Etc/GMT-3');
 	$postData = array(
-		'TITLE'             => $lead_title,
+		'TITLE'             => date('dmyHi'),
+		'SOURCE_DESCRIPTION'=> $lead_title,
 		'NAME'              => isset($form['name']) ? $form['name'] : '',
 		'SOURCE_ID'         => 'WEB', // источник
 
@@ -69,6 +72,7 @@ function rsform_b24_send_lead($lead_title, array $form, array $params = null)
 
 		'COMMENTS' => (isset($form['message']) ? $form['message'] : ''),
 	);
+	date_default_timezone_set($timezone);
 
 	// append authorization data
 	if (defined('CRM_AUTH')) {
