@@ -29,7 +29,7 @@
 
 			include $rsform_b24_plugin_path.'rest.php';
 
-			$title = $subject.' - '.time();
+			$title = "Сообщение с формы $subject";
 			$form = array(
 				'name' => $_POST['user_name'],
 				'message' => $_POST['text_comment'],
@@ -78,7 +78,7 @@
 	function send_mail($message, $subject){
 		// почта, на которую придет письмо
 		//$mail_to = 'sebafurego@yandex.ru';
-		$mail_to = 'info@stimul-tb.ru, event@stimul-tb.ru, vityan9376@yandex.ru';
+		$mail_to = 'info@stimul-tb.ru, event@stimul-tb.ru';
 		
 		// заголовок письма
 		$headers= "MIME-Version: 1.0\r\n";

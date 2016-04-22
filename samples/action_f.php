@@ -23,7 +23,7 @@
 
 			include $rsform_b24_plugin_path.'rest.php';
 
-			$title = 'Заявка на корпоратив - '.time();
+			$title = 'Сообщение с формы "Заявка на корпоратив"';
 			$form = array(
 				'name' => $_POST['user_name_f'],
 				'phone' => $_POST['user_phone_f'],
