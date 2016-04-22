@@ -15,11 +15,16 @@ Sends data of submitted forms of RSForm! component to the Bitrix24 portal.
 
 ### Useful links:
 
-#### Version 0.0.1
-#### Last work version 0.0.1
-#### Last stable version 0.0.1
+#### Version 0.0.2
+#### Last work version 0.0.2
+#### Last stable version 0.0.2
 
 ### Versions history
+
+#### version 0.0.2
+
+-  Title changed to current datetime formated. 
+-  Lead form send as SOURCE_DESCRIPTION
 
 #### version 0.0.1
 

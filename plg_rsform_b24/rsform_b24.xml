@@ -7,7 +7,7 @@
 	<license>GNU General Public License</license>
 	<authorEmail>mail@pshentsoff.ru</authorEmail>
 	<authorUrl>pshentsoff.ru</authorUrl>
-	<version>0.0.1</version>
+	<version>0.0.2</version>
 	<description><![CDATA[Sends data of submitted forms of RSForm! component to the Bitrix24 portal.]]></description>
 
 	<files>
